@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         HashSet<Integer> set = new HashSet<>();
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -19,10 +19,11 @@ public class Main {
         for (int i = 0; i < m; i++) {
 
             if(set.contains(Integer.parseInt(st.nextToken()))) {
-                System.out.println(1);
-            } else System.out.println(0);
+                sb.append(1).append("\n");
+            } else sb.append(0).append("\n");
         }
 
+        System.out.println(sb);
     }
 }
 

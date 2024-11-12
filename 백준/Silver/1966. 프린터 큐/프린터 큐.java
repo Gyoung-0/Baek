@@ -4,55 +4,48 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine()); // 테스트 케이스 개수
 
-        for (int i = 0; i < T; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int N = Integer.parseInt(st.nextToken()); // 문서의 개수
-            int M = Integer.parseInt(st.nextToken()); // 추적할 문서의 인덱스
+        int T = Integer.parseInt(br.readLine());
 
+
+        for(int i=0; i < T; i++){
             Queue<Print> queue = new LinkedList<>();
+            StringTokenizer st =new StringTokenizer(br.readLine());
+            int N = Integer.parseInt(st.nextToken());
+            int M = Integer.parseInt(st.nextToken());
             st = new StringTokenizer(br.readLine());
-
-            for (int j = 0; j < N; j++) {
-                queue.offer(new Print(j, Integer.parseInt(st.nextToken()))); // 문서 추가
+            for(int j = 0; j < N; j++){
+                queue.offer(new Print(j, Integer.parseInt(st.nextToken())));
             }
-
             int count = 0;
-
-            while (!queue.isEmpty()) {
+            while(!queue.isEmpty()){
                 Print current = queue.poll();
-                boolean hasHigherPriority = false;
+                boolean hasHighPriority = false;
 
-                // 현재 문서보다 우선순위가 높은 문서가 있는지 확인
-                for (Print p : queue) {
-                    if (p.priority > current.priority) {
-                        hasHigherPriority = true;
+                for(Print P : queue){
+                    if(P.priority > current.priority){
+                        hasHighPriority = true;
                         break;
                     }
                 }
-
-                if (hasHigherPriority) {
-                    // 우선순위가 높은 문서가 있으면 현재 문서를 다시 큐에 넣음
+                if(hasHighPriority){
                     queue.offer(current);
-                } else {
-                    // 현재 문서를 출력
+                } else{
                     count++;
-                    if (current.index == M) {
+                    if(M == current.index){
                         System.out.println(count);
                         break;
                     }
                 }
+
             }
         }
-    }
 
-    // Print 클래스 정의
-    static class Print {
+    }
+    static class Print{
         int index;
         int priority;
-
-        public Print(int index, int priority) {
+        public Print(int index, int priority){
             this.index = index;
             this.priority = priority;
         }
